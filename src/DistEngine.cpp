@@ -4,7 +4,7 @@
 
 #include "../include/DistEngine.h"
 
-namespace DOSE {
+namespace dose {
     const double ad_mu = 10;
     const double ad_t = 2;
 

@@ -9,11 +9,12 @@
 #include <iomanip>
 #include "chrono"
 #include "memory"
+#include "mpi/mpi.h"
+#include <vector>
 #include "../ThirdParty/Eigen/Dense"
 #include "../ThirdParty/Eigen/IterativeLinearSolvers"
-#include "mpi/mpi.h"
 
-namespace DOSE {
+namespace dose {
 
     using namespace Eigen;
     using namespace std::chrono;
@@ -21,7 +22,8 @@ namespace DOSE {
     using Mat = Matrix<Scalar, Dynamic, Dynamic, RowMajor>;
     using Vec = Matrix<Scalar, Dynamic, 1, ColMajor>;
     using Ind = typename Mat::Index;
-
+    using VectorDouble = std::vector<double>;
+    using VectorDouble2D = std::vector<VectorDouble>;
     struct TruncatedNewTonSettings {
         int maxIter = 1000;
         double eps = 1e-5;
@@ -55,6 +57,14 @@ namespace DOSE {
         LinearRegression,
         LogisticRegression
     };
+
+    enum class SolverStatue {
+        OPTIMAL,
+        SUBOPTIMAL,
+        MAXITER,
+        INFEASIBLE
+    };
+
 
 }
 #endif //DOSE_TYPES_H

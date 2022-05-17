@@ -3,7 +3,7 @@
 //
 
 #include "../include/LogRSolver.h"
-namespace DOSE {
+namespace dose {
     Vec runTN(const Mat &A,
               const Vec &b,
               Vec &x,
@@ -12,7 +12,7 @@ namespace DOSE {
               double &rho,
               const Vec &binVec,
               const double &M,
-              const DOSE::TruncatedNewTonSettings
+              const dose::TruncatedNewTonSettings
               &settings) {
 
         size_t iter = 0;

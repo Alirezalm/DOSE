@@ -8,7 +8,7 @@
 #include "LocalNLPSolver.h"
 
 
-namespace DOSE {
+namespace dose {
 
 
 /// Runs RHADMM for Logreg or linreg problem in the following form

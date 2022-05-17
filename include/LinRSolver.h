@@ -7,7 +7,7 @@
 
 #include "types.h"
 
-namespace DOSE {
+namespace dose {
 
 
     Vec solveLinR(const Mat &A,

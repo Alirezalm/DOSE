@@ -3,7 +3,7 @@
 //
 
 #include "../include/LinRSolver.h"
-namespace DOSE {
+namespace dose {
     Vec solveLinR(const Mat &A,
                   const Vec &b,
                   Vec &x,

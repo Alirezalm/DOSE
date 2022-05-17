@@ -7,7 +7,7 @@
 
 #include "types.h"
 
-namespace DOSE {
+namespace dose {
 
 
     /// runTN solves the local logistic regression problem.
