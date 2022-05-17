@@ -2,7 +2,7 @@
 // Created by alireza on 16/05/22.
 //
 
-#include "LogRSolver.h"
+#include "../include/LogRSolver.h"
 namespace DOSE {
     Vec runTN(const Mat &A,
               const Vec &b,

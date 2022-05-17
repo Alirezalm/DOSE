@@ -2,7 +2,7 @@
 // Created by alireza on 16/05/22.
 //
 
-#include "LinRSolver.h"
+#include "../include/LinRSolver.h"
 namespace DOSE {
     Vec solveLinR(const Mat &A,
                   const Vec &b,
