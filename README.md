@@ -1,7 +1,7 @@
 ### Distributed Operator Splitting Engine (DOSE)
 Distributed Operator Splitting Engine (DOSE) is a shared library provide a mathematical
-optimization solver to solve Linear and Logistic Regression problems with static . DOSE is the core 
-numerical Engine used in SysCopt project. 
+optimization solver to solve Linear and Logistic Regression problems with static cardinality
+constraint. DOSE is the core numerical Engine used in SysCopt project. 
 
 Compilation:
 
