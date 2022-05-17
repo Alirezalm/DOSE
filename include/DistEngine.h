@@ -4,6 +4,7 @@
 
 #ifndef DOSE_DISTENGINE_H
 #define DOSE_DISTENGINE_H
+
 #include "LocalNLPSolver.h"
 
 

@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(DOSE VERSION 1.0.0 DESCRIPTION "Distributed Operator Splitting Engine")
-
-
 find_package(MPI REQUIRED)
 set(CMAKE_CXX_FLAGS "-march=native -O2")
 set(CMAKE_CXX_COMPILER mpicxx)
 set(CMAKE_CXX_STANDARD 20)
-add_library(DOSE SHARED src/LinRSolver.cpp src/LogRSolver.cpp src/DistEngine.cpp)
+add_library(DOSE SHARED src/LinRSolver.cpp src/LogRSolver.cpp src/DistEngine.cpp src/DOSE.cpp include/DOSE.h)
