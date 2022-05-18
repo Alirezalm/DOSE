@@ -18,9 +18,9 @@ namespace dose {
                        const SettingsPtr settings,
                        const ProblemType &problemType);
 
-        ~LogRegStrategy() = default;
+        virtual ~LogRegStrategy();
 
-        void solve(const VectorDouble &binvar) override;
+        void solve(const Vec &binvar) override;
 
     };
 }

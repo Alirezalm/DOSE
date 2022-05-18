@@ -21,9 +21,11 @@ namespace dose {
         this->settings = settings;
     }
 
-    void LogRegStrategy::solve(const VectorDouble &binvar) {
+    LogRegStrategy::~LogRegStrategy() = default;
 
-        solution =
+    void LogRegStrategy::solve(const Vec &binvar) {
+
+        solution = runRHADMM(A, b, rank, maxNodes, M, binvar, settings, problemType);
 
     }
 
