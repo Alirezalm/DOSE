@@ -8,33 +8,36 @@
 namespace dose {
 
 
-    DOSE::DOSE(const VectorDouble2D &pdataSet,
-               const VectorDouble &pdataRes,
-               ProblemType ptype,
-               SettingsPtr settings) : pdataSet(pdataSet),
-                                       pdataRes(pdataRes),
-                                       ptype(ptype),
-                                       settings(settings) {
+    DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
+               int &rank, int &totalNodes) : pdataSet(pdataSet),
+                                             pdataRes(pdataRes),
+                                             ptype(ptype),
+                                             settings(settings),
+                                             rank(rank),
+                                             totalNodes(totalNodes) {
         validateData();
         toEigen();
 
 
     }
 
-    DOSE::DOSE(const VectorDouble2D &pdataSet,
-               const VectorDouble &pdataRes,
-               ProblemType ptype) : pdataSet(pdataSet),
-                                    pdataRes(pdataRes),
-                                    ptype(ptype) {
+    DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank,
+               int &totalNodes) : pdataSet(pdataSet),
+                                  pdataRes(pdataRes),
+                                  ptype(ptype),
+                                  rank(rank),
+                                  totalNodes(totalNodes) {
         validateData();
         toEigen();
 
         settings = std::make_shared<RHADMMSettings>();  //default settings
     }
 
-    DOSE::DOSE(const VectorDouble2D &pdataSet,
-               const VectorDouble &pdataRes) : pdataSet(pdataSet),
-                                               pdataRes(pdataRes) {
+    DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank,
+               int &totalNodes) : pdataSet(pdataSet),
+                                  pdataRes(pdataRes),
+                                  rank(rank),
+                                  totalNodes(totalNodes) {
         validateData();
         toEigen();
 

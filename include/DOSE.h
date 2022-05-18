@@ -12,12 +12,12 @@ namespace dose {
 
     class DOSE {
     public:
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype,
-             SettingsPtr settings);
+        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
+             int &rank, int &totalNodes);
 
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype);
+        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank, int &totalNodes);
 
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes);
+        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank, int &totalNodes);
 
         ~DOSE() = default;
 
@@ -38,21 +38,30 @@ namespace dose {
         SolverStatue getStatus() const;
 
     private:
+        // data
         VectorDouble2D pdataSet;
         VectorDouble pdataRes;
         ProblemType ptype;
         SettingsPtr settings;
 
+        // solution
         double totalObjval;
         double localObjval;
         VectorDouble solution;
         SolverStatue status;
 
+        //eigen
         Mat pdataSetMat;
         Vec pdataResVec;
 
+        // index
         int rows;
         int cols;
+
+
+        // MPI
+        int rank;
+        int totalNodes;
 
         void validateData();
 
