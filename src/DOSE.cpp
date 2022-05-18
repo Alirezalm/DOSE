@@ -69,6 +69,10 @@ namespace dose {
     }
 
     void DOSE::toEigen() {
+        pdataSetMat.setZero(rows, cols);
+        pdataResVec.setZero(rows, 1);
+        utilities::vec2Vec(pdataRes, pdataResVec);
+        utilities::mat2Mat(pdataSet, pdataSetMat);
 
     }
 

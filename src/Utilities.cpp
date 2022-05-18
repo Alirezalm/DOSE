@@ -36,7 +36,7 @@ namespace dose::utilities {
         }
     }
 
-    void mat2Mec(const VectorDouble2D &std_mat, Mat &eigen_mat) {
+    void mat2Mat(const VectorDouble2D &std_mat, Mat &eigen_mat) {
         int rows = std_mat.size();
         int cols = std_mat.front().size();
         assert((eigen_mat.rows() == rows) && (eigen_mat.cols() == cols));
