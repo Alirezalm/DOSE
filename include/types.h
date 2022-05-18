@@ -66,6 +66,6 @@ namespace dose {
     };
     using SettingsPtr = std::shared_ptr<RHADMMSettings>;
     using SolutionPtr = std::shared_ptr<RHADMMSolution>;
-
+    using InfoPtr = std::shared_ptr<RHADMMInfo>;
 }
 #endif //DOSE_TYPES_H

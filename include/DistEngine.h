@@ -24,13 +24,13 @@ namespace dose {
 /// \param binVec Binary Vector
 /// \param settings
 /// \param problemType type of problem
-    RHADMMSolution runRHADMM(const Mat &A,
+    SolutionPtr runRHADMM(const Mat &A,
                              const Vec &b,
                              const int &rank,
                              const int &maxNodes,
                              const double &M,
                              const Vec &binVec,
-                             const RHADMMSettings &settings,
+                             const SettingsPtr settings,
                              const ProblemType &problemType);
 
 /// cold starts params
@@ -85,7 +85,7 @@ namespace dose {
     void updateTotalObjVal(double &local_f, double &total_f);
 
 /// formats output
-    void outputLog(std::unique_ptr<RHADMMInfo> &info);
+    void outputLog(InfoPtr info);
 
     void printHeader();
 

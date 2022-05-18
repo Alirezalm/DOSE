@@ -12,13 +12,13 @@ namespace dose {
     const int data = 10;
 
 
-    RHADMMSolution runRHADMM(const Mat &A,
+    SolutionPtr runRHADMM(const Mat &A,
                              const Vec &b,
                              const int &rank,
                              const int &maxNodes,
                              const double &M,
                              const Vec &binVec,
-                             const RHADMMSettings &settings,
+                             const SettingsPtr settings,
                              const ProblemType &problemType) {
 
         const int n = static_cast<int>(A.cols());
@@ -32,18 +32,18 @@ namespace dose {
         coldStart(x, y, z, z_old, n);
 
         // default rho
-        double rho = settings.rho;
+        double rho = settings->rho;
         double t;
         double pres;
         double dres;
         double total_f;
         double local_f;
 
-        std::unique_ptr<RHADMMInfo> info(new RHADMMInfo);
-        RHADMMSolution solution;
+        InfoPtr  info = std::make_shared<RHADMMInfo>();
+        SolutionPtr solution = std::make_shared<RHADMMSolution>();
 
-        if ((settings.verbose) && (rank == 0)) printHeader();
-        for (int i = 0; i < settings.maxIter; ++i) {
+        if ((settings->verbose) && (rank == 0)) printHeader();
+        for (int i = 0; i < settings->maxIter; ++i) {
             z_old = z;
             updateX(A, b, x, y, z, rho, binVec, M, total_f, problemType);
             updateZ(x, y, z, rho, n, maxNodes);
@@ -51,8 +51,8 @@ namespace dose {
             updateLocalObjVal(A, b, x, local_f, problemType);
             updateTotalObjVal(local_f, total_f);
             updateResiduals(pres, dres, t, x, y, z, z_old, rho, maxNodes);
-            if (settings.adaptive) updateRho(rho, t, dres);
-            if ((settings.verbose) && (rank == 0)) {
+            if (settings->adaptive) updateRho(rho, t, dres);
+            if ((settings->verbose) && (rank == 0)) {
                 info->iter = i;
                 info->t = t;
                 info->dres = dres;
@@ -61,18 +61,18 @@ namespace dose {
                 outputLog(info);
             }
 
-            if ((t <= settings.eps) && dres <= settings.eps) {
-                solution.x = x;
-                solution.total_f = total_f;
-                solution.local_f = local_f;
-                solution.status = 0;
+            if ((t <= settings->eps) && dres <= settings->eps) {
+                solution-> x= x;
+                solution->total_f = total_f;
+                solution->local_f = local_f;
+                solution->status = 0;
                 return solution;
             }
         }
-        solution.x = x;
-        solution.total_f = total_f;
-        solution.local_f = local_f;
-        solution.status = 1;
+        solution->x = x;
+        solution->total_f = total_f;
+        solution->local_f = local_f;
+        solution->status = 1;
         return solution;
 
     }
@@ -151,7 +151,7 @@ namespace dose {
         MPI_Allreduce(&local_f, &total_f, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
     }
 
-    void outputLog(std::unique_ptr<RHADMMInfo> &info) {
+    void outputLog(InfoPtr info) {
         std::cout << std::setw(space) << std::scientific << std::setprecision(3) << info->iter;
         std::cout << std::setw(space) << " ";
         std::cout << std::setw(data) << std::scientific << std::setprecision(3) << info->t;

@@ -14,8 +14,16 @@ namespace dose {
 
         virtual void solve(const VectorDouble &binvar) = 0;
 
-    private:
+    protected:
         SolutionPtr solution;
+        Mat A;
+        Mat b;
+        int rank;
+        int maxNodes;
+        double M;
+        SettingsPtr settings;
+        ProblemType problemType;
+
     };
 }
 
