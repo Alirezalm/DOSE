@@ -4,6 +4,8 @@
 
 #include "../include/DOSE.h"
 #include "../include/Utilities.h"
+#include "../include/LinRegStrategy.h"
+#include "../include/LogRegStrategy.h"
 
 namespace dose {
 
@@ -63,7 +65,15 @@ namespace dose {
     void DOSE::solve(const VectorDouble &binvec) {
         Vec binvecEigen(cols, 1);
         utilities::vec2Vec(binvec, binvecEigen);
-        //TODO: implement strategy pattern to select proper strategy based on ptype.
+        AlgorithmPtr algorithm = LinRegPtr(new LinRegStrategy(pdataSetMat,));
+        switch (ptype) {
+            case ProblemType::LinearRegression:
+                algorithm = std::make_shared<LinRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
+                algorithm->solve(binvecEigen);
+            case ProblemType::LogisticRegression:
+                algorithm = std::make_shared<LogRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
+                algorithm->solve(binvecEigen);
+        }
     }
 
     double DOSE::getTotalObjval() const {

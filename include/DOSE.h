@@ -46,6 +46,7 @@ namespace dose {
         VectorDouble pdataRes;
         ProblemType ptype;
         SettingsPtr settings;
+        double M;
 
         // solution
         double totalObjval;
