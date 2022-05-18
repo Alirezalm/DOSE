@@ -42,6 +42,21 @@ namespace dose {
         ptype = ProblemType::LogisticRegression;    // default problem type
     }
 
+    void DOSE::toEigen() {
+        pdataSetMat.setZero(rows, cols);
+        pdataResVec.setZero(rows, 1);
+        utilities::vec2Vec(pdataRes, pdataResVec);
+        utilities::mat2Mat(pdataSet, pdataSetMat);
+
+    }
+
+    void DOSE::validateData() {
+        utilities::checkVec2Mat(pdataSet);
+        rows = pdataSet.size();
+        cols = pdataSet.front().size();
+        utilities::checkVec2Vec(pdataRes, rows);
+    }
+
 
     double DOSE::getTotalObjval() const {
         return totalObjval;
@@ -73,21 +88,6 @@ namespace dose {
 
     void DOSE::setSettings(const SettingsPtr settingsNew) {
         DOSE::settings = settingsNew;
-    }
-
-    void DOSE::toEigen() {
-        pdataSetMat.setZero(rows, cols);
-        pdataResVec.setZero(rows, 1);
-        utilities::vec2Vec(pdataRes, pdataResVec);
-        utilities::mat2Mat(pdataSet, pdataSetMat);
-
-    }
-
-    void DOSE::validateData() {
-        utilities::checkVec2Mat(pdataSet);
-        rows = pdataSet.size();
-        cols = pdataSet.front().size();
-        utilities::checkVec2Vec(pdataRes, rows);
     }
 
 

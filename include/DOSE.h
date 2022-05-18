@@ -19,6 +19,8 @@ namespace dose {
 
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes);
 
+        ~DOSE() = default;
+
         void setPdataSet(const VectorDouble2D &pdataSetNew);
 
         void setPdataRes(const VectorDouble &pdataResNew);
