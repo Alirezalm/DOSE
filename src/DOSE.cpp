@@ -3,7 +3,8 @@
 //
 
 #include "../include/DOSE.h"
-#include "cassert"
+#include "../include/Utilities.h"
+
 namespace dose {
 
 
@@ -14,6 +15,7 @@ namespace dose {
                                                  pdataRes(pdataRes),
                                                  ptype(ptype),
                                                  settings(settings) {
+        validateData();
 
 
     }
@@ -22,11 +24,14 @@ namespace dose {
                const VectorDouble &pdataRes,
                ProblemType ptype) : pdataSet(pdataSet),
                                     pdataRes(pdataRes),
-                                    ptype(ptype) {}
+                                    ptype(ptype) {
+        validateData();
+    }
 
     DOSE::DOSE(const VectorDouble2D &pdataSet,
                const VectorDouble &pdataRes) : pdataSet(pdataSet),
                                                pdataRes(pdataRes) {
+        validateData()
 
     }
 
@@ -67,9 +72,11 @@ namespace dose {
 
     }
 
-    void DOSE::checkDataSet() {
-
-
+    void DOSE::validateData() {
+        utilities::checkVec2Mat(pdataSet);
+        rows = pdataSet.size();
+        cols = pdataSet.front().size();
+        utilities::checkVec2Vec(pdataRes, rows);
     }
 
 

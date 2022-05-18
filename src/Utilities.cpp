@@ -4,9 +4,10 @@
 
 #include "../include/Utilities.h"
 
-namespace dose {
+namespace dose::utilities {
 
-    void checkColumnConsistency(const VectorDouble2D &vec2d, const int default_cols) {
+
+    void checkColumnConsistency(const VectorDouble2D &vec2d, const int default_cols) noexcept {
 
         for (auto column: vec2d) {
             if (column.size() != default_cols) {
@@ -15,11 +16,17 @@ namespace dose {
         }
     }
 
-    void dose::checkVec2Mat(const VectorDouble2D &vec2d) {
+    void checkVec2Mat(const VectorDouble2D &vec2d) noexcept {
         int rows = vec2d.size();
         int cols = vec2d.front().size();
         assert((rows > 0) && (cols > 0) && (rows >= cols));
         checkColumnConsistency(vec2d, cols);
 
     }
+
+    inline void checkVec2Vec(const VectorDouble &vec1d, const int default_row) noexcept {
+        assert(vec1d.size() == default_row);
+    }
+
+
 }

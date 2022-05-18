@@ -49,8 +49,10 @@ namespace dose {
         Mat pdataSetMat;
         Vec pdataResVec;
 
-        void checkDataSet();
+        int rows;
+        int cols;
 
+        void validateData();
         void toEigen();
     };
 

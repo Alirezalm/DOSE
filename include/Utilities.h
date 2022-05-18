@@ -8,9 +8,14 @@
 #include "types.h"
 #include "Exceptions.h"
 
-namespace dose {
-    void checkColumnConsistency(const VectorDouble2D &vec2d);
+namespace dose ::utilities {
 
-    void checkVec2Mat(const VectorDouble2D &vec2d);
+
+    void checkColumnConsistency(const VectorDouble2D &vec2d, const int default_cols) noexcept;
+
+    void checkVec2Mat(const VectorDouble2D &vec2d) noexcept;
+
+    inline void checkVec2Vec(const VectorDouble &vec1d, const int default_row) noexcept;
+
 }
 #endif //DOSE_UTILITIES_H
