@@ -65,7 +65,7 @@ namespace dose {
     void DOSE::solve(const VectorDouble &binvec) {
         Vec binvecEigen(cols, 1);
         utilities::vec2Vec(binvec, binvecEigen);
-        AlgorithmPtr algorithm = LinRegPtr(new LinRegStrategy(pdataSetMat,));
+        AlgorithmPtr algorithm;
         switch (ptype) {
             case ProblemType::LinearRegression:
                 algorithm = std::make_shared<LinRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);

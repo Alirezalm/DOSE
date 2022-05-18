@@ -71,7 +71,6 @@ namespace dose {
 
         void toEigen();
     };
-
 }
 
 
