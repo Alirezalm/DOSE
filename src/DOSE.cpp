@@ -31,7 +31,7 @@ namespace dose {
     DOSE::DOSE(const VectorDouble2D &pdataSet,
                const VectorDouble &pdataRes) : pdataSet(pdataSet),
                                                pdataRes(pdataRes) {
-        validateData()
+        validateData();
 
     }
 
