@@ -2,12 +2,12 @@
 // Created by alireza on 18/05/22.
 //
 
-#include "../include/LogRegStrategy.h"
+#include "../include/LinRegStrategy.h"
 #include "../include/DistEngine.h"
 
 namespace dose {
 
-    LogRegStrategy::LogRegStrategy(const Mat &A,
+    LinRegStrategy::LinRegStrategy(const Mat &A,
                                    const Vec &b,
                                    const int &rank,
                                    const int &maxNodes,
@@ -19,16 +19,13 @@ namespace dose {
         this->maxNodes = maxNodes;
         this->M = M;
         this->settings = settings;
-        this->problemType = ProblemType::LogisticRegression;
+        this->problemType = ProblemType::LinearRegression;
+
     }
 
-    LogRegStrategy::~LogRegStrategy() = default;
+    LinRegStrategy::~LinRegStrategy() = default;
 
-    void LogRegStrategy::solve(const Vec &binvar) {
-
+    void LinRegStrategy::solve(const Vec &binvar) {
         solution = runRHADMM(A, b, rank, maxNodes, M, binvar, settings, problemType);
-
     }
-
-
 }
