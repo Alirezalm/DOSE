@@ -60,6 +60,11 @@ namespace dose {
         utilities::checkVec2Vec(pdataRes, rows);
     }
 
+    void DOSE::solve(const VectorDouble &binvec) {
+        Vec binvecEigen(cols, 1);
+        utilities::vec2Vec(binvec, binvecEigen);
+        //TODO: implement strategy pattern to select proper strategy based on ptype.
+    }
 
     double DOSE::getTotalObjval() const {
         return totalObjval;

@@ -15,11 +15,14 @@ namespace dose {
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
              int &rank, int &totalNodes);
 
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank, int &totalNodes);
+        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank,
+             int &totalNodes);
 
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank, int &totalNodes);
 
         ~DOSE() = default;
+
+        void solve(const VectorDouble &binvec);
 
         void setPdataSet(const VectorDouble2D &pdataSetNew);
 
