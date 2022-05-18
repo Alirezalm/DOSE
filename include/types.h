@@ -65,6 +65,7 @@ namespace dose {
         INFEASIBLE
     };
     using SettingsPtr = std::shared_ptr<RHADMMSettings>;
+    using SolutionPtr = std::shared_ptr<RHADMMSolution>;
 
 }
 #endif //DOSE_TYPES_H
