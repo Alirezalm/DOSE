@@ -3,7 +3,7 @@
 //
 
 #include "../include/DOSE.h"
-
+#include "cassert"
 namespace dose {
 
 
@@ -67,7 +67,8 @@ namespace dose {
 
     }
 
-    void DOSE::checkDataSet() throw {
+    void DOSE::checkDataSet() {
+
 
     }
 

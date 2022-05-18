@@ -6,6 +6,7 @@
 #define DOSE_DOSE_H
 
 #include "DistEngine.h"
+#include "Exceptions.h"
 
 namespace dose {
 
@@ -48,7 +49,7 @@ namespace dose {
         Mat pdataSetMat;
         Vec pdataResVec;
 
-        void checkDataSet() throw;
+        void checkDataSet();
 
         void toEigen();
     };
