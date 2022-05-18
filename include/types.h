@@ -64,7 +64,7 @@ namespace dose {
         MAXITER,
         INFEASIBLE
     };
-
+    using SettingsPtr = std::shared_ptr<RHADMMSettings>;
 
 }
 #endif //DOSE_TYPES_H

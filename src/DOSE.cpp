@@ -11,11 +11,12 @@ namespace dose {
     DOSE::DOSE(const VectorDouble2D &pdataSet,
                const VectorDouble &pdataRes,
                ProblemType ptype,
-               const RHADMMSettings &settings) : pdataSet(pdataSet),
-                                                 pdataRes(pdataRes),
-                                                 ptype(ptype),
-                                                 settings(settings) {
+               SettingsPtr settings) : pdataSet(pdataSet),
+                                       pdataRes(pdataRes),
+                                       ptype(ptype),
+                                       settings(settings) {
         validateData();
+        toEigen();
 
 
     }
@@ -26,13 +27,19 @@ namespace dose {
                                     pdataRes(pdataRes),
                                     ptype(ptype) {
         validateData();
+        toEigen();
+
+        settings = std::make_shared<RHADMMSettings>();  //default settings
     }
 
     DOSE::DOSE(const VectorDouble2D &pdataSet,
                const VectorDouble &pdataRes) : pdataSet(pdataSet),
                                                pdataRes(pdataRes) {
         validateData();
+        toEigen();
 
+        settings = std::make_shared<RHADMMSettings>();  //default settings
+        ptype = ProblemType::LogisticRegression;    // default problem type
     }
 
 
@@ -64,7 +71,7 @@ namespace dose {
         DOSE::ptype = ptypeNew;
     }
 
-    void DOSE::setSettings(const RHADMMSettings &settingsNew) {
+    void DOSE::setSettings(const SettingsPtr settingsNew) {
         DOSE::settings = settingsNew;
     }
 

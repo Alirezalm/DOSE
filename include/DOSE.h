@@ -13,7 +13,7 @@ namespace dose {
     class DOSE {
     public:
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype,
-             const RHADMMSettings &settings);
+             SettingsPtr settings);
 
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype);
 
@@ -25,7 +25,7 @@ namespace dose {
 
         void setPtype(ProblemType ptypeNew);
 
-        void setSettings(const RHADMMSettings &settingsNew);
+        void setSettings(const SettingsPtr settingsNew);
 
         double getTotalObjval() const;
 
@@ -39,7 +39,7 @@ namespace dose {
         VectorDouble2D pdataSet;
         VectorDouble pdataRes;
         ProblemType ptype;
-        RHADMMSettings settings;
+        SettingsPtr settings;
 
         double totalObjval;
         double localObjval;
@@ -53,6 +53,7 @@ namespace dose {
         int cols;
 
         void validateData();
+
         void toEigen();
     };
 
