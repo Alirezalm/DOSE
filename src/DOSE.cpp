@@ -52,20 +52,20 @@ namespace dose {
         return status;
     }
 
-    void DOSE::setPdataSet(const VectorDouble2D &pdataSet) {
-        DOSE::pdataSet = pdataSet;
+    void DOSE::setPdataSet(const VectorDouble2D &pdataSetNew) {
+        DOSE::pdataSet = pdataSetNew;
     }
 
-    void DOSE::setPdataRes(const VectorDouble &pdataRes) {
-        DOSE::pdataRes = pdataRes;
+    void DOSE::setPdataRes(const VectorDouble &pdataResNew) {
+        DOSE::pdataRes = pdataResNew;
     }
 
-    void DOSE::setPtype(ProblemType ptype) {
-        DOSE::ptype = ptype;
+    void DOSE::setPtype(ProblemType ptypeNew) {
+        DOSE::ptype = ptypeNew;
     }
 
-    void DOSE::setSettings(const RHADMMSettings &settings) {
-        DOSE::settings = settings;
+    void DOSE::setSettings(const RHADMMSettings &settingsNew) {
+        DOSE::settings = settingsNew;
     }
 
     void DOSE::toEigen() {

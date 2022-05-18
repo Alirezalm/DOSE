@@ -28,5 +28,24 @@ namespace dose::utilities {
         assert(vec1d.size() == default_row);
     }
 
+    void vec2Vec(const VectorDouble &std_vec, Vec &eigen_vec) {
+        int rows = std_vec.size();
+        assert(eigen_vec.size() == rows);
+        for (int i = 0; i < rows; ++i) {
+            eigen_vec[i] = std_vec[i];
+        }
+    }
+
+    void mat2Mec(const VectorDouble2D &std_mat, Mat &eigen_mat) {
+        int rows = std_mat.size();
+        int cols = std_mat.front().size();
+        assert((eigen_mat.rows() == rows) && (eigen_mat.cols() == cols));
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                eigen_mat(i, j) = std_mat[i][j];
+            }
+        }
+    }
+
 
 }

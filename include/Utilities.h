@@ -17,5 +17,7 @@ namespace dose ::utilities {
 
     inline void checkVec2Vec(const VectorDouble &vec1d, const int default_row) noexcept;
 
+    void vec2Vec(const VectorDouble &std_vec,  Vec &eigen_vec);
+    void mat2Mec(const VectorDouble2D &std_mat, Mat &eigen_mat);
 }
 #endif //DOSE_UTILITIES_H

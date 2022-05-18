@@ -19,13 +19,13 @@ namespace dose {
 
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes);
 
-        void setPdataSet(const VectorDouble2D &pdataSet);
+        void setPdataSet(const VectorDouble2D &pdataSetNew);
 
-        void setPdataRes(const VectorDouble &pdataRes);
+        void setPdataRes(const VectorDouble &pdataResNew);
 
-        void setPtype(ProblemType ptype);
+        void setPtype(ProblemType ptypeNew);
 
-        void setSettings(const RHADMMSettings &settings);
+        void setSettings(const RHADMMSettings &settingsNew);
 
         double getTotalObjval() const;
 
