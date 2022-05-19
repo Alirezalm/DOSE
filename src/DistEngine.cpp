@@ -164,7 +164,7 @@ namespace dose {
     }
 
     void printHeader() {
-        std::cout << std::setw(space * 2) << std::left << "iter";
+        std::cout << std::setw(space * 2) << std::left << "\niter";
         std::cout << std::setw(data + space) << std::left << "pres";
         std::cout << std::setw(data + space) << std::left << "dres";
         std::cout << std::setw(data + space) << std::left << "fval";

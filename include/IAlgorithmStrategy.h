@@ -17,7 +17,7 @@ namespace dose {
     protected:
         SolutionPtr solution;
         Mat A;
-        Mat b;
+        Vec b;
         int rank;
         int maxNodes;
         double M;

@@ -12,7 +12,7 @@ namespace dose::utilities {
         for (auto column: vec2d) {
             if (column.size() != default_cols) {
                 throw InvalidProblemSize("inconsistent dataset, each row must have same number of columns");
-            } else{
+            } else {
 // TODO fixed compiler warning
             }
         }
@@ -36,6 +36,8 @@ namespace dose::utilities {
         for (int i = 0; i < rows; ++i) {
             eigen_vec[i] = std_vec[i];
         }
+
+
     }
 
     void mat2Mat(const VectorDouble2D &std_mat, Mat &eigen_mat) {

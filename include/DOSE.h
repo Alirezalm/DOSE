@@ -13,12 +13,12 @@ namespace dose {
     class DOSE {
     public:
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
-             int &rank, int &totalNodes);
+             int &rank, int &totalNodes, double M);
 
         DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank,
-             int &totalNodes);
+             int &totalNodes, double M);
 
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank, int &totalNodes);
+        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank, int &totalNodes, double M);
 
         ~DOSE() = default;
 

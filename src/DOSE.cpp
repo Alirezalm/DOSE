@@ -11,12 +11,13 @@ namespace dose {
 
 
     DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
-               int &rank, int &totalNodes) : pdataSet(pdataSet),
+               int &rank, int &totalNodes, double M) : pdataSet(pdataSet),
                                              pdataRes(pdataRes),
                                              ptype(ptype),
                                              settings(settings),
                                              rank(rank),
-                                             totalNodes(totalNodes) {
+                                             totalNodes(totalNodes),
+                                             M(M){
         validateData();
         toEigen();
 
@@ -24,11 +25,12 @@ namespace dose {
     }
 
     DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank,
-               int &totalNodes) : pdataSet(pdataSet),
+               int &totalNodes, double M) : pdataSet(pdataSet),
                                   pdataRes(pdataRes),
                                   ptype(ptype),
                                   rank(rank),
-                                  totalNodes(totalNodes) {
+                                  totalNodes(totalNodes),
+                                  M(M){
         validateData();
         toEigen();
 
@@ -36,10 +38,10 @@ namespace dose {
     }
 
     DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank,
-               int &totalNodes) : pdataSet(pdataSet),
+               int &totalNodes, double M) : pdataSet(pdataSet),
                                   pdataRes(pdataRes),
                                   rank(rank),
-                                  totalNodes(totalNodes) {
+                                  totalNodes(totalNodes), M(M) {
         validateData();
         toEigen();
 
@@ -63,6 +65,7 @@ namespace dose {
     }
 
     void DOSE::solve(const VectorDouble &binvec) {
+        assert(binvec.size() == cols);
         Vec binvecEigen(cols, 1);
         utilities::vec2Vec(binvec, binvecEigen);
         AlgorithmPtr algorithm;
@@ -70,9 +73,11 @@ namespace dose {
             case ProblemType::LinearRegression:
                 algorithm = std::make_shared<LinRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
                 algorithm->solve(binvecEigen);
+                break;
             case ProblemType::LogisticRegression:
                 algorithm = std::make_shared<LogRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
                 algorithm->solve(binvecEigen);
+                break;
         }
     }
 

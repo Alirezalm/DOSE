@@ -35,7 +35,7 @@ namespace dose {
         double maxIter = 1000;
         double eps = 1e-8;
         bool adaptive = true;
-        bool verbose = false;
+        bool verbose = true;
     };
 
     struct RHADMMInfo {
