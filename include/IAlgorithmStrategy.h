@@ -10,7 +10,7 @@
 namespace dose {
     class IAlgorithmStrategy {
     public:
-        virtual ~IAlgorithmStrategy() = 0;
+        virtual ~IAlgorithmStrategy() = default;
 
         virtual void solve(const Vec &binvar) = 0;
 

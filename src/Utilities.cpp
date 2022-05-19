@@ -12,6 +12,8 @@ namespace dose::utilities {
         for (auto column: vec2d) {
             if (column.size() != default_cols) {
                 throw InvalidProblemSize("inconsistent dataset, each row must have same number of columns");
+            } else{
+// TODO fixed compiler warning
             }
         }
     }
@@ -24,7 +26,7 @@ namespace dose::utilities {
 
     }
 
-    inline void checkVec2Vec(const VectorDouble &vec1d, const int default_row) noexcept {
+    void checkVec2Vec(const VectorDouble &vec1d, const int default_row) noexcept {
         assert(vec1d.size() == default_row);
     }
 

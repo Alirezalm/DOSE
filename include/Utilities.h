@@ -15,7 +15,7 @@ namespace dose ::utilities {
 
     void checkVec2Mat(const VectorDouble2D &vec2d) noexcept;
 
-    inline void checkVec2Vec(const VectorDouble &vec1d, const int default_row) noexcept;
+    void checkVec2Vec(const VectorDouble &vec1d, const int default_row) noexcept;
 
     void vec2Vec(const VectorDouble &std_vec,  Vec &eigen_vec);
     void mat2Mat(const VectorDouble2D &std_mat, Mat &eigen_mat);
