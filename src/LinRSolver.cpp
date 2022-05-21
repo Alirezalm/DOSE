@@ -15,12 +15,13 @@ namespace dose {
         const Ind n = x.size();
         Mat I(n, n);
         I.setIdentity();
-        Mat Q = 0.5 * (A.transpose() * A + rho * I);
+//        Mat Q = (A.transpose() * A );
+//        Vec q = - A.transpose() * b ;
+        Mat Q = (A.transpose() * A + rho * I);
         Vec q = -A.transpose() * b + y - rho * z;
 //        double d = 0.5 * b.dot(b) - y.dot(z) + 0.5 * rho * z.dot(z);
         ConjugateGradient<Mat> cg(Q);
         x = cg.solve(-q);
-        projectLinR(x, binVec, M);
         return x;
     }
 

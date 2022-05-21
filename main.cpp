@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     settings->adaptive = false;
     settings->maxIter = 5000;
     settings->eps = 1e-12;
-    auto *solver = new dose::DOSE(b, a, dose::LogisticRegression, settings, rank, maxNodes, M);
+    auto *solver = new dose::DOSE(b, a, dose::LinearRegression, settings, rank, maxNodes, M);
     solver->solve(binvec);
     MPI_Finalize();
 //    time_t start, end;
