@@ -66,6 +66,8 @@ namespace dose {
                 solution->total_f = total_f;
                 solution->local_f = local_f;
                 solution->status = 0;
+                std::cout <<std::setprecision(15)<< total_f <<    std::endl;
+                std::cout << x.transpose() << std::endl;
                 return solution;
             }
         }
