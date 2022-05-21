@@ -12,19 +12,21 @@ namespace dose {
     class AlgorithmManager {
 
     public:
-        AlgorithmManager(const AlgorithmPtr solutionAlgorithm);
+        AlgorithmManager();
 
         ~AlgorithmManager();
 
         void setAlgorithmStrategy(AlgorithmPtr algorithm);
 
-        void runAlgorithm(Mat &binvec);
+        void runAlgorithm(Vec &binvec);
 
     private:
         AlgorithmPtr solutionAlgorithm;
 
     };
+    using AlgManagerPtr = std::shared_ptr<AlgorithmManager>;
 }
+
 
 
 #endif //DOSE_ALGORITHMMANAGER_H

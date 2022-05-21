@@ -4,8 +4,7 @@
 
 #include "../include/DOSE.h"
 #include "../include/Utilities.h"
-#include "../include/LinRegStrategy.h"
-#include "../include/LogRegStrategy.h"
+#include "../include/AlgorithmManager.h"
 
 namespace dose {
 
@@ -68,17 +67,21 @@ namespace dose {
         assert(binvec.size() == cols);
         Vec binvecEigen(cols, 1);
         utilities::vec2Vec(binvec, binvecEigen);
+        AlgManagerPtr algorithmManager = std::make_shared<AlgorithmManager>();
         AlgorithmPtr algorithm;
         switch (ptype) {
             case ProblemType::LinearRegression:
                 algorithm = std::make_shared<LinRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
-                algorithm->solve(binvecEigen);
+                algorithmManager->setAlgorithmStrategy(algorithm);
+                algorithmManager->runAlgorithm(binvecEigen);
                 break;
             case ProblemType::LogisticRegression:
                 algorithm = std::make_shared<LogRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
-                algorithm->solve(binvecEigen);
+                algorithmManager->setAlgorithmStrategy(algorithm);
+                algorithmManager->runAlgorithm(binvecEigen);
                 break;
         }
+
     }
 
     double DOSE::getTotalObjval() const {

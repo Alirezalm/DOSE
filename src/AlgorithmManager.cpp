@@ -6,13 +6,13 @@
 
 namespace dose {
 
-    AlgorithmManager::AlgorithmManager(const AlgorithmPtr solutionAlgorithm) : solutionAlgorithm(solutionAlgorithm) {}
+    AlgorithmManager::AlgorithmManager() = default;
 
     void AlgorithmManager::setAlgorithmStrategy(AlgorithmPtr algorithm) {
         solutionAlgorithm = algorithm;
     }
 
-    void AlgorithmManager::runAlgorithm(Mat &binvec) {
+    void AlgorithmManager::runAlgorithm(Vec &binvec) {
         solutionAlgorithm->solve(binvec);
     }
 
