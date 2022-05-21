@@ -38,7 +38,6 @@ namespace dose {
             }
 //            projectLogR(x, binVec, M);
             if (iter >= settings.maxIter) {
-                assert(2 < 1);
                 return x;
             }
         }

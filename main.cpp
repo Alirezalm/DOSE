@@ -1,69 +1,40 @@
 #include <iostream>
 #include "include/DOSE.h"
 #include "memory"
-
+#include "include/RandomDataGenerator.h"
+#include "include/Utilities.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    MPI_Init(&argc, &argv);
-    int rank, maxNodes;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank); // get MPI rank
-    MPI_Comm_size(MPI_COMM_WORLD, &maxNodes); // get MPI size
-    dose::VectorDouble a;
-    dose::VectorDouble2D b;
-    if (rank == 0) {
-        a = {0, 0, 1, 1, 0};
-        b = {
-                {0.11, 0.22, 0.31},
-                {0.54, 0.13, 0.52},
-                {0.65, 0.11, 0.65},
-                {0.51, 0.21, 0.56},
-                {0.85, 0.17, 0.53},
-        };
+    int m = 10, n = 5;
+    auto ptype = dose::LogisticRegression;
+    auto *problem_generator = new dose::RandomDataGenerator(m, n, ptype);
 
-    } else if (rank == 1) {
-        a = {0, 0, 1, 1, 1};
-        b = {
-                {0.85, 0.13, 0.65},
-                {0.54, 0.77, 0.98},
-                {0.23, 0.76, 0.45},
-                {0.42, 0.4,  0.8},
-                {0.45, 0.35, 0.75},
-        };
-    } else if (rank == 2) {
-        a = {1, 0, 0, 1, 0};
-        b = {
-                {0.85, 0.13, 0.65},
-                {0.54, 0.77, 0.98},
-                {0.23, 0.76, 0.45},
-                {0.42, 0.4,  0.8},
-                {0.45, 0.35, 0.75},
-        };
-    } else if (rank == 3) {
-        a = {1, 1, 1, 1, 0};
-        b = {
-                {0.85, 0.13, 0.65},
-                {0.54, 0.77, 0.98},
-                {0.23, 0.76, 0.45},
-                {0.42, 0.4,  0.8},
-                {0.45, 0.35, 0.75},
-        };
-    };
+    dose::Mat A(m, n);
+    dose::Vec b(m, 1);
 
-    double M = 10.0;
-    dose::VectorDouble binvec = {1.0, 1.0, 0.0};
-    dose::SettingsPtr settings = std::make_shared<dose::RHADMMSettings>();
-    settings->rho = std::stod(argv[1]);
-    settings->adaptive = true;
-    settings->maxIter = 5000;
-    settings->eps = 1e-12;
-    auto *solver = new dose::DOSE(b, a, dose::LinearRegression, settings, rank, maxNodes, M);
-    solver->solve(binvec);
-    MPI_Finalize();
+    problem_generator->generate();
+    auto asv = problem_generator->getDataSet();
+    auto bsv = problem_generator->getResponse();
+
+
+    dose::utilities::vec2Vec(bsv, b);
+    dose::utilities::mat2Mat(asv, A);
+
+    std::cout << A << std::endl;
 //    time_t start, end;
 //    double avg;
-//
+//  0.154178   -1.77317   -1.13836  -0.917964   -1.16264
+//-0.0160573   -2.77261   -1.17536  -0.992605   -1.71847
+//  -1.06705   -3.01456  -0.250487   -1.20984   -1.63812
+//  -1.05043   -1.45661  -0.670674 0.00203637   0.457728
+// -0.433857  -0.671579   -0.86699   -2.94077  -0.764439
+// -0.761355   -1.92716   -3.44502  -0.719236    -2.2604
+//   -1.0017   -1.52302  -0.531642  -0.702384   -1.43202
+//  -0.48558   -1.39536   -1.64821   0.646895   -1.67272
+//  -1.77348   -2.10256   0.325432   0.111374   -2.04608
+//  -1.33322   -1.28347   -2.09322   -1.49614    1.80344
 //    MPI_Init(&argc, &argv);
 //
 //    int rank, maxNodes;
