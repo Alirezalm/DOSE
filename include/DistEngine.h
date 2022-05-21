@@ -104,5 +104,6 @@ namespace dose {
                            const Vec &x,
                            double &local_f,
                            const ProblemType &ptype);
+    void projectOnBinaryBoundedSpace(Vec &x, const Vec &binVec, const double &M, ProblemType ptype);
 }
 #endif //DOSE_DISTENGINE_H

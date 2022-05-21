@@ -36,13 +36,14 @@ namespace dose {
                 std::cout << "iter = " << iter << " " << "fval = " <<
                           fval << " " << "error = " << error << " t = " << t << std::endl;
             }
-
+//            projectLogR(x, binVec, M);
             if (iter >= settings.maxIter) {
-                projectLogR(x, binVec, M);
+                assert(2 < 1);
                 return x;
             }
         }
-        projectLogR(x, binVec, M);
+
+//        projectLogR(x, binVec, M);
         return x;
 
 

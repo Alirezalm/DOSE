@@ -34,11 +34,12 @@ int main(int argc, char *argv[]) {
     };
 
     double M = 10.0;
-    dose::VectorDouble binvec = {1, 0, 1};
+    dose::VectorDouble binvec = {1.0, 0.0, 1.0};
     dose::SettingsPtr settings = std::make_shared<dose::RHADMMSettings>();
     settings->rho = std::stod(argv[1]);
     settings->adaptive = false;
     settings->maxIter = 5000;
+    settings->eps = 1e-12;
     auto *solver = new dose::DOSE(b, a, dose::LogisticRegression, settings, rank, maxNodes, M);
     solver->solve(binvec);
     MPI_Finalize();

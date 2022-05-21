@@ -13,13 +13,13 @@ namespace dose {
 
 
     SolutionPtr runRHADMM(const Mat &A,
-                             const Vec &b,
-                             const int &rank,
-                             const int &maxNodes,
-                             const double &M,
-                             const Vec &binVec,
-                             const SettingsPtr settings,
-                             const ProblemType &problemType) {
+                          const Vec &b,
+                          const int &rank,
+                          const int &maxNodes,
+                          const double &M,
+                          const Vec &binVec,
+                          const SettingsPtr settings,
+                          const ProblemType &problemType) {
 
         const int n = static_cast<int>(A.cols());
 
@@ -39,7 +39,7 @@ namespace dose {
         double total_f;
         double local_f;
 
-        InfoPtr  info = std::make_shared<RHADMMInfo>();
+        InfoPtr info = std::make_shared<RHADMMInfo>();
         SolutionPtr solution = std::make_shared<RHADMMSolution>();
 
         if ((settings->verbose) && (rank == 0)) printHeader();
@@ -47,6 +47,7 @@ namespace dose {
             z_old = z;
             updateX(A, b, x, y, z, rho, binVec, M, total_f, problemType);
             updateZ(x, y, z, rho, n, maxNodes);
+            projectOnBinaryBoundedSpace(z, binVec, M, problemType);
             updateY(x, y, z, rho);
             updateLocalObjVal(A, b, x, local_f, problemType);
             updateTotalObjVal(local_f, total_f);
@@ -62,11 +63,11 @@ namespace dose {
             }
 
             if ((t <= settings->eps) && dres <= settings->eps) {
-                solution-> x= x;
+                solution->x = x;
                 solution->total_f = total_f;
                 solution->local_f = local_f;
                 solution->status = 0;
-                std::cout <<std::setprecision(15)<< total_f <<    std::endl;
+                std::cout << std::setprecision(15) << total_f << std::endl;
                 std::cout << x.transpose() << std::endl;
                 return solution;
             }
@@ -198,6 +199,17 @@ namespace dose {
             computeLogRObjVal(A, b, x, local_f);
         } else if (ptype == LinearRegression) {
             computeLinRObjVal(A, b, x, local_f);
+        }
+    }
+
+    void projectOnBinaryBoundedSpace(Vec &x, const Vec &binVec, const double &M, ProblemType ptype) {
+        switch (ptype) {
+            case ProblemType::LogisticRegression:
+                projectLogR(x, binVec, M);
+                break;
+            case ProblemType::LinearRegression:
+                projectLinR(x, binVec, M);
+                break;
         }
     }
 
