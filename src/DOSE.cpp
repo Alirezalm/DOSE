@@ -1,6 +1,9 @@
 //
 // Created by alireza on 17/05/22.
 //
+// TODO: fix compiler warning
+// TODO: check clang-tidy warnings
+// TODO: export to library
 
 #include "../include/DOSE.h"
 #include "../include/Utilities.h"
