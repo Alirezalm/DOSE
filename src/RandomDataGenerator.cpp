@@ -48,8 +48,10 @@ namespace dose {
         switch (ptype) {
             case ProblemType::LogisticRegression:
                 randomResponseLogRegGenerator();
+                break;
             case ProblemType::LinearRegression:
                 randomResponseLinRegGenerator();
+                break;
         }
         randomDataSetGenerator();
 
@@ -64,6 +66,15 @@ namespace dose {
         assert(dataSet.front().size() == ncols);
         assert(dataSet.size() == nrows);
         return dataSet;
+    }
+
+    VectorDouble RandomDataGenerator::getRandomInteger(int size) {
+        VectorDouble v(size);
+        uniform_distribution_ints = std::uniform_int_distribution<int>(0, 1);
+        for (int i = 0; i < size; ++i) {
+            v.at(i) = uniform_distribution_ints(generator);
+        }
+        return v;
     }
 
     RandomDataGenerator::~RandomDataGenerator() = default;

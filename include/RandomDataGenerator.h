@@ -19,6 +19,8 @@ namespace dose {
 
         void generate();
 
+        VectorDouble getRandomInteger(int size);
+
         const VectorDouble &getResponse() const;
 
         const VectorDouble2D &getDataSet() const;

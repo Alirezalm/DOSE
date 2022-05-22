@@ -63,6 +63,7 @@ namespace dose {
             }
 
             if ((t <= settings->eps) && dres <= settings->eps) {
+                std::cout<< problemType<< std::endl;
                 solution->x = x;
                 solution->total_f = total_f;
                 solution->local_f = local_f;

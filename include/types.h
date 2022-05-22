@@ -31,7 +31,7 @@ namespace dose {
     };
 
     struct RHADMMSettings {
-        double rho = 500.0;
+        double rho = 1.0;
         double maxIter = 1000;
         double eps = 1e-8;
         bool adaptive = true;
