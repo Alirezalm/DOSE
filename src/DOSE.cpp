@@ -14,12 +14,12 @@ namespace dose {
 
     DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
                int &rank, int &totalNodes, double M) : pdataSet(pdataSet),
-                                             pdataRes(pdataRes),
-                                             ptype(ptype),
-                                             settings(settings),
-                                             rank(rank),
-                                             totalNodes(totalNodes),
-                                             M(M){
+                                                       pdataRes(pdataRes),
+                                                       ptype(ptype),
+                                                       settings(settings),
+                                                       rank(rank),
+                                                       totalNodes(totalNodes),
+                                                       M(M) {
         validateData();
         toEigen();
 
@@ -28,11 +28,11 @@ namespace dose {
 
     DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank,
                int &totalNodes, double M) : pdataSet(pdataSet),
-                                  pdataRes(pdataRes),
-                                  ptype(ptype),
-                                  rank(rank),
-                                  totalNodes(totalNodes),
-                                  M(M){
+                                            pdataRes(pdataRes),
+                                            ptype(ptype),
+                                            rank(rank),
+                                            totalNodes(totalNodes),
+                                            M(M) {
         validateData();
         toEigen();
 
@@ -41,9 +41,9 @@ namespace dose {
 
     DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank,
                int &totalNodes, double M) : pdataSet(pdataSet),
-                                  pdataRes(pdataRes),
-                                  rank(rank),
-                                  totalNodes(totalNodes), M(M) {
+                                            pdataRes(pdataRes),
+                                            rank(rank),
+                                            totalNodes(totalNodes), M(M) {
         validateData();
         toEigen();
 
@@ -61,8 +61,8 @@ namespace dose {
 
     void DOSE::validateData() {
         utilities::checkVec2Mat(pdataSet);
-        rows = pdataSet.size();
-        cols = pdataSet.front().size();
+        rows = static_cast<int>(pdataSet.size());
+        cols = static_cast<int>(pdataSet.front().size());
         utilities::checkVec2Vec(pdataRes, rows);
     }
 
