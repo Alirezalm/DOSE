@@ -48,9 +48,11 @@ namespace dose {
 
     struct RHADMMSolution {
         Vec x;
-        double local_f;
+        Vec gx;
+		double local_f;
         double total_f;
         int status;
+		double minEig;
     };
 
     enum ProblemType {

@@ -8,7 +8,8 @@
 #include "LocalNLPSolver.h"
 
 
-namespace dose {
+namespace dose
+{
 
 
 /// Runs RHADMM for Logreg or linreg problem in the following form
@@ -24,14 +25,14 @@ namespace dose {
 /// \param binVec Binary Vector
 /// \param settings
 /// \param problemType type of problem
-    SolutionPtr runRHADMM(const Mat &A,
-                             const Vec &b,
-                             const int &rank,
-                             const int &maxNodes,
-                             const double &M,
-                             const Vec &binVec,
-                             const SettingsPtr settings,
-                             const ProblemType &problemType);
+	SolutionPtr runRHADMM(const Mat& A,
+		const Vec& b,
+		const int& rank,
+		const int& maxNodes,
+		const double& M,
+		const Vec& binVec,
+		const SettingsPtr settings,
+		const ProblemType& problemType);
 
 /// cold starts params
 /// \param x admm current solution
@@ -39,71 +40,89 @@ namespace dose {
 /// \param z admm consensus var
 /// \param zOld last consensus var
 /// \param n number of variables
-    void coldStart(Vec &x, Vec &y, Vec &z, Vec &zOld, const Ind &n);
+	void coldStart(Vec& x, Vec& y, Vec& z, Vec& zOld, const Ind& n);
 
-    /// Updates consensus variables
-    void updateZ(Vec &x,
-                 Vec &y,
-                 Vec &z,
-                 double &rho,
-                 const int &n,
-                 const int &maxNodes);
+	/// Updates consensus variables
+	void updateZ(Vec& x,
+		Vec& y,
+		Vec& z,
+		double& rho,
+		const int& n,
+		const int& maxNodes);
 
 /// updates primal variable according to problem type
-    void updateX(const Mat &A,
-                 const Vec &b,
-                 Vec &x,
-                 Vec &y,
-                 Vec &z,
-                 double &rho,
-                 const Vec &binVec,
-                 const double &M,
-                 double &total_f,
-                 const ProblemType &problemType);
+	void updateX(const Mat& A,
+		const Vec& b,
+		Vec& x,
+		Vec& y,
+		Vec& z,
+		double& rho,
+		const Vec& binVec,
+		const double& M,
+		double& total_f,
+		const ProblemType& problemType);
 
 /// updates dual variables
-    void updateY(Vec &x,
-                 Vec &y,
-                 Vec &z,
-                 double &rho);
+	void updateY(Vec& x,
+		Vec& y,
+		Vec& z,
+		double& rho);
 
 /// updates residualts
-    void updateResiduals(double &pres,
-                         double &dres,
-                         double &t,
-                         Vec &x,
-                         Vec &y,
-                         Vec &z,
-                         Vec &z_old,
-                         double &rho,
-                         int maxNodes);
+	void updateResiduals(double& pres,
+		double& dres,
+		double& t,
+		Vec& x,
+		Vec& y,
+		Vec& z,
+		Vec& z_old,
+		double& rho,
+		int maxNodes);
 
 /// applies adaptive rho strategy
-    void updateRho(double &rho, const double &t, const double &dres);
+	void updateRho(double& rho, const double& t, const double& dres);
 
 /// updates total objective value
-    void updateTotalObjVal(double &local_f, double &total_f);
+	void updateTotalObjVal(double& local_f, double& total_f);
 
 /// formats output
-    void outputLog(InfoPtr info);
+	void outputLog(InfoPtr info);
 
-    void printHeader();
+	void printHeader();
 
-    void computeLinRObjVal(const Mat &A,
-                           const Vec &b,
-                           const Vec &x,
-                           double &local_f);
+	void computeLinRObjVal(const Mat& A,
+		const Vec& b,
+		const Vec& x,
+		double& local_f);
 
-    void computeLogRObjVal(const Mat &A,
-                           const Vec &b,
-                           const Vec &x,
-                           double &local_f);
+	void computeLogRObjVal(const Mat& A,
+		const Vec& b,
+		const Vec& x,
+		double& local_f);
 
-    void updateLocalObjVal(const Mat &A,
-                           const Vec &b,
-                           const Vec &x,
-                           double &local_f,
-                           const ProblemType &ptype);
-    void projectOnBinaryBoundedSpace(Vec &x, const Vec &binVec, const double &M, ProblemType ptype);
+	Vec computeLogRGrad(const Mat& A,
+		const Vec& b,
+		const Vec& x
+	);
+
+	Vec computeLinRGrad(const Mat& A,
+		const Vec& b,
+		const Vec& x
+	);
+
+	double computeLogRMinEig(const Mat& A,
+		const Vec& x
+	);
+
+	double computeLinRMinEig(const Mat& A,
+		const Vec& x
+	);
+
+	void updateLocalObjVal(const Mat& A,
+		const Vec& b,
+		const Vec& x,
+		double& local_f,
+		const ProblemType& ptype);
+	void projectOnBinaryBoundedSpace(Vec& x, const Vec& binVec, const double& M, ProblemType ptype);
 }
 #endif //DOSE_DISTENGINE_H

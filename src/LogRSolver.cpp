@@ -116,8 +116,8 @@ namespace dose {
 
     Mat computeHessian(const Mat &A, const Vec &x, const double &rho) {
         const Vec h = computeLogistic(A, x);
-        const Array<double, Dynamic, 1> _tmpArray = h.array();
-        const Vec _temp = _tmpArray - _tmpArray.pow(2);
+//        const Array<double, Dynamic, 1> _tmpArray = h.array();
+        const Vec _temp = h.array() - h.array().pow(2);
         const Ind m = A.rows(), n = A.cols();
         Mat M(m, n);
         for (int j = 0; j < m; ++j) {
