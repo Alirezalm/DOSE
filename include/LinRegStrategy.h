@@ -17,9 +17,10 @@ namespace dose {
                        const double &M,
                        const SettingsPtr settings);
 
-        virtual ~LinRegStrategy();
+        virtual ~LinRegStrategy() override;
 
         void solve(const Vec &binvar) override;
+		DoseSolution getSolution() override;
     };
 }
 

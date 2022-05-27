@@ -72,7 +72,7 @@ namespace dose
 				solution->x = x;
 				solution->total_f = total_f;
 				solution->local_f = local_f;
-				solution->status = 0;
+				solution->status = SolverStatus::OPTIMAL;
 				switch (problemType)
 				{
 				case LogisticRegression:
@@ -90,7 +90,7 @@ namespace dose
 		solution->x = x;
 		solution->total_f = total_f;
 		solution->local_f = local_f;
-		solution->status = 1;
+		solution->status = SolverStatus::MAXITER;
 		return solution;
 
 	}
@@ -278,7 +278,7 @@ namespace dose
 	double computeLinRMinEig(const Mat& A, const Vec& x)
 	{
 		Mat Hessian = A.transpose() * A;
-		return Hessian.eigenvalues().real().minCoeff()
+		return Hessian.eigenvalues().real().minCoeff();
 	}
 
 }

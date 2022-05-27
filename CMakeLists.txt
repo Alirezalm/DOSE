@@ -15,3 +15,14 @@ add_library(DOSE SHARED
         src/AlgorithmManager.cpp
         src/RandomDataGenerator.cpp
         )
+#add_executable(DOSE main.cpp
+#        src/LinRSolver.cpp
+#        src/LogRSolver.cpp
+#        src/DistEngine.cpp
+#        src/DOSE.cpp
+#        src/Utilities.cpp
+#        src/LogRegStrategy.cpp
+#        src/LinRegStrategy.cpp
+#        src/AlgorithmManager.cpp
+#        src/RandomDataGenerator.cpp
+#        )

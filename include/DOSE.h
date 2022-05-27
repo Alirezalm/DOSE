@@ -8,69 +8,61 @@
 #include "DistEngine.h"
 #include "Exceptions.h"
 
-namespace dose {
+namespace dose
+{
 
-    class DOSE {
-    public:
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
-             int &rank, int &totalNodes, double M);
+	class DOSE
+	{
+	public:
+		DOSE(const VectorDouble2D& pdataSet, const VectorDouble& pdataRes, ProblemType ptype, SettingsPtr settings,
+			int& rank, int& totalNodes, double M);
 
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank,
-             int &totalNodes, double M);
+		DOSE(const VectorDouble2D& pdataSet, const VectorDouble& pdataRes, ProblemType ptype, int& rank,
+			int& totalNodes, double M);
 
-        DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank, int &totalNodes, double M);
+		DOSE(const VectorDouble2D& pdataSet, const VectorDouble& pdataRes, int& rank, int& totalNodes, double M);
 
-        ~DOSE() = default;
+		~DOSE() = default;
 
-        void solve(const VectorDouble &binvec);
+		void solve(const VectorDouble& binvec);
 
-        void setPdataSet(const VectorDouble2D &pdataSetNew);
+		void setPdataSet(const VectorDouble2D& pdataSetNew);
 
-        void setPdataRes(const VectorDouble &pdataResNew);
+		void setPdataRes(const VectorDouble& pdataResNew);
 
-        void setPtype(ProblemType ptypeNew);
+		void setPtype(ProblemType ptypeNew);
 
-        void setSettings(const SettingsPtr settingsNew);
+		void setSettings(const SettingsPtr settingsNew);
 
-        double getTotalObjval() const;
+		const DoseSolution & GetSolution() const;
 
-        double getLocalObjval() const;
+	private:
+		// data
+		VectorDouble2D pdataSet;
+		VectorDouble pdataRes;
+		ProblemType ptype;
+		SettingsPtr settings;
+		double M;
 
-        const VectorDouble &getSolution() const;
+		// solution
+		DoseSolution solution;
 
-        SolverStatue getStatus() const;
+		//eigen
+		Mat pdataSetMat;
+		Vec pdataResVec;
 
-    private:
-        // data
-        VectorDouble2D pdataSet;
-        VectorDouble pdataRes;
-        ProblemType ptype;
-        SettingsPtr settings;
-        double M;
+		// index
+		int rows;
+		int cols;
 
-        // solution
-        double totalObjval;
-        double localObjval;
-        VectorDouble solution;
-        SolverStatue status;
+		// MPI
+		int rank;
+		int totalNodes;
 
-        //eigen
-        Mat pdataSetMat;
-        Vec pdataResVec;
+		void validateData();
 
-        // index
-        int rows;
-        int cols;
-
-
-        // MPI
-        int rank;
-        int totalNodes;
-
-        void validateData();
-
-        void toEigen();
-    };
+		void toEigen();
+	};
 }
 
 

@@ -18,7 +18,7 @@ namespace dose {
 
         void setAlgorithmStrategy(AlgorithmPtr algorithm);
 
-        void runAlgorithm(Vec &binvec);
+        DoseSolution runAlgorithm(Vec &binvec);
 
     private:
         AlgorithmPtr solutionAlgorithm;

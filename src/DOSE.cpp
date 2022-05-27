@@ -76,32 +76,23 @@ namespace dose {
             case ProblemType::LinearRegression:
                 algorithm = std::make_shared<LinRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
                 algorithmManager->setAlgorithmStrategy(algorithm);
-                algorithmManager->runAlgorithm(binvecEigen);
+                solution =  algorithmManager->runAlgorithm(binvecEigen);
                 break;
             case ProblemType::LogisticRegression:
                 algorithm = std::make_shared<LogRegStrategy>(pdataSetMat, pdataResVec, rank, totalNodes, M, settings);
                 algorithmManager->setAlgorithmStrategy(algorithm);
-                algorithmManager->runAlgorithm(binvecEigen);
+                solution = algorithmManager->runAlgorithm(binvecEigen);
                 break;
         }
 
     }
 
-    double DOSE::getTotalObjval() const {
-        return totalObjval;
-    }
 
-    double DOSE::getLocalObjval() const {
-        return localObjval;
-    }
 
-    const VectorDouble &DOSE::getSolution() const {
-        return solution;
-    }
-
-    SolverStatue DOSE::getStatus() const {
-        return status;
-    }
+	const DoseSolution & DOSE::GetSolution() const
+	{
+		return solution;
+	}
 
     void DOSE::setPdataSet(const VectorDouble2D &pdataSetNew) {
         DOSE::pdataSet = pdataSetNew;
@@ -114,10 +105,8 @@ namespace dose {
     void DOSE::setPtype(ProblemType ptypeNew) {
         DOSE::ptype = ptypeNew;
     }
-
-    void DOSE::setSettings(const SettingsPtr settingsNew) {
+	void DOSE::setSettings(const SettingsPtr settingsNew) {
         DOSE::settings = settingsNew;
     }
-
 
 }

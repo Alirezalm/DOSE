@@ -13,9 +13,9 @@ namespace dose {
         virtual ~IAlgorithmStrategy() = default;
 
         virtual void solve(const Vec &binvar) = 0;
-
+		virtual DoseSolution getSolution() = 0;
     protected:
-        SolutionPtr solution;
+        DoseSolution doseSolution;
         Mat A;
         Vec b;
         int rank;

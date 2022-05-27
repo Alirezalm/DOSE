@@ -18,9 +18,10 @@ namespace dose {
                        const SettingsPtr settings
 );
 
-        virtual ~LogRegStrategy();
+        virtual ~LogRegStrategy() override;
 
         void solve(const Vec &binvar) override;
+		DoseSolution getSolution() override;
 
     };
 }
