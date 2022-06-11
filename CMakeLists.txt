@@ -4,7 +4,7 @@ find_package(MPI REQUIRED)
 set(CMAKE_CXX_FLAGS "-march=native -O2")
 set(CMAKE_CXX_COMPILER mpicxx)
 set(CMAKE_CXX_STANDARD 17)
-add_library(DOSE SHARED
+add_library(DOSE STATIC
         src/LinRSolver.cpp
         src/LogRSolver.cpp
         src/DistEngine.cpp
