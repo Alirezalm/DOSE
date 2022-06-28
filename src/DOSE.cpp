@@ -13,7 +13,7 @@ namespace dose {
 
 
     DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, SettingsPtr settings,
-               int &rank, int &totalNodes, double M) : pdataSet(pdataSet),
+               int rank, int totalNodes, double M) : pdataSet(pdataSet),
                                                        pdataRes(pdataRes),
                                                        ptype(ptype),
                                                        settings(settings),
@@ -26,8 +26,8 @@ namespace dose {
 
     }
 
-    DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int &rank,
-               int &totalNodes, double M) : pdataSet(pdataSet),
+    DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, ProblemType ptype, int rank,
+               int totalNodes, double M) : pdataSet(pdataSet),
                                             pdataRes(pdataRes),
                                             ptype(ptype),
                                             rank(rank),
@@ -39,8 +39,8 @@ namespace dose {
         settings = std::make_shared<RHADMMSettings>();  //default settings
     }
 
-    DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int &rank,
-               int &totalNodes, double M) : pdataSet(pdataSet),
+    DOSE::DOSE(const VectorDouble2D &pdataSet, const VectorDouble &pdataRes, int rank,
+               int totalNodes, double M) : pdataSet(pdataSet),
                                             pdataRes(pdataRes),
                                             rank(rank),
                                             totalNodes(totalNodes), M(M) {
