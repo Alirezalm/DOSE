@@ -217,8 +217,10 @@ namespace dose
 		double& local_f)
 	{
 		Vec h = computeLogistic(A, x);
+        auto m = static_cast<double>(h.size()) ;
 		local_f = -b.dot(h.array().log().matrix()) -
 			(1.0 - b.array()).matrix().dot((1.0 - h.array()).log().matrix());
+        local_f = local_f / m;
 	}
 
 	void updateLocalObjVal(const Mat& A,
@@ -252,7 +254,8 @@ namespace dose
 	Vec computeLogRGrad(const Mat& A, const Vec& b, const Vec& x)
 	{
 		Vec h = computeLogistic(A, x);
-		return A.transpose() * (h - b);
+        auto m = static_cast<double>(h.size()) ;
+		return (1.0 / m) * A.transpose() * (h - b);
 	}
 	Vec computeLinRGrad(const Mat& A, const Vec& b, const Vec& x)
 	{
@@ -272,7 +275,7 @@ namespace dose
 			M.row(j) = A.row(j) * _temp(j);
 		}
 
-		Mat Hessian = A.transpose() * M;
+		Mat Hessian = (1/static_cast<double>(m)) * A.transpose() * M;
 		return Hessian.eigenvalues().real().minCoeff();
 	}
 	double computeLinRMinEig(const Mat& A, const Vec& x)
