@@ -55,8 +55,10 @@ namespace dose {
                       const Vec &z,
                       const double &rho) {
         Vec h = computeLogistic(A, x);
+        auto m = static_cast<double>(h.size()) ;
         auto f = -b.dot(h.array().log().matrix()) -
                  (1.0 - b.array()).matrix().dot((1.0 - h.array()).log().matrix());
+        f /= m;
         return f + y.dot(x - z) + 0.5 * rho * (x - z).squaredNorm();
 
 
@@ -83,7 +85,8 @@ namespace dose {
                     const Vec &z,
                     const double &rho) {
         Vec h = computeLogistic(A, x);
-        return A.transpose() * (h - b) + y + rho * (x - z);
+        auto m = static_cast<double>(h.size()) ;
+        return (1.0 / m) * (A.transpose() * (h - b)) + y + rho * (x - z);
     }
 
     double computeLineSearch(const Mat &A,
@@ -125,8 +128,8 @@ namespace dose {
         }
 
         Mat I(n, n);
-
-        return A.transpose() * M + rho * I.setIdentity();
+ 
+        return (1.0 / static_cast<int>(m)) * (A.transpose() * M) + rho * I.setIdentity();
 
 
     }

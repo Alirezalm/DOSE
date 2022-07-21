@@ -18,8 +18,8 @@ namespace dose {
 //        Mat Q = (A.transpose() * A );
 //        Vec q = - A.transpose() * b ;
         auto m = static_cast<double>(b.size()) ;
-        Mat Q = (A.transpose() * A + rho * I) / m;
-        Vec q = (-A.transpose() * b + y - rho * z) / m;
+        Mat Q = (1.0 / m) * (A.transpose() * A) + rho * I;
+        Vec q = (1.0 / m) * (-A.transpose() * b) + y - rho * z;
 //        double d = 0.5 * b.dot(b) - y.dot(z) + 0.5 * rho * z.dot(z);
         ConjugateGradient<Mat> cg(Q);
         x = cg.solve(-q);
