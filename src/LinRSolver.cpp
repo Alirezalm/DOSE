@@ -17,8 +17,9 @@ namespace dose {
         I.setIdentity();
 //        Mat Q = (A.transpose() * A );
 //        Vec q = - A.transpose() * b ;
-        Mat Q = (A.transpose() * A + rho * I);
-        Vec q = -A.transpose() * b + y - rho * z;
+        auto m = static_cast<double>(b.size()) ;
+        Mat Q = (A.transpose() * A + rho * I) / m;
+        Vec q = (-A.transpose() * b + y - rho * z) / m;
 //        double d = 0.5 * b.dot(b) - y.dot(z) + 0.5 * rho * z.dot(z);
         ConjugateGradient<Mat> cg(Q);
         x = cg.solve(-q);
